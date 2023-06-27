@@ -59,7 +59,16 @@ def result(board, action):
     boardcopy[row][coloumn]=player(board)
     return boardcopy
 
-
+def rowcheck(board,player):
+    for i in range(3):
+        if board[i][0]==player and board[i][1]==player and board[i][2]==player:
+            return True
+    return False
+def coloumncheck(board,player):
+    for i in range(3):
+        if board[0][i]==player and board[1][i]==player and board[2][i]==player:
+            return True
+    return False
 def winner(board):
     """
     Returns the winner of the game, if there is one.
