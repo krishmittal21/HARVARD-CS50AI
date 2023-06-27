@@ -47,60 +47,30 @@ def result(board, action):
     boardcopy[action[0]][action[1]]=player(board)
     return boardcopy
 
-def rowcheck(board,player):
-    for i in range(3):
-        if board[i][0]==player and board[i][1]==player and board[i][2]==player:
-            return True
-    return False
-def coloumncheck(board,player):
-    for i in range(3):
-        if board[0][i]==player and board[1][i]==player and board[2][i]==player:
-            return True
-    return False
-def diagonalcheck(board,player):
-    n=0 #count for diagonal
-    for i in range(3):
-        for j in range(3):
-            if i==j and board[i][j]==player:
-                n+=1
-    if n==3:
-        return True
-    else :
-        return False
-def diagonalcheck2(board,player):
-    n=0 #count for diagonal
-    for i in range(3):
-        for j in range(3):
-            if (3-i-1)==j and board[i][j]==player:
-                n+=1
-    if n==3:
-        return True
-    else :
-        return False
-
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    if rowcheck(board,X) or coloumncheck(board,X) or diagonalcheck(board,X) or diagonalcheck2(board,X):
-        return X
-    elif rowcheck(board,O) or coloumncheck(board,O) or diagonalcheck(board,O) or diagonalcheck2(board,O):
-        return O
-    else:
-        return None
-
+    for player in [X, O]:
+        for i in range(3):
+            # Check rows
+            if all(cell == player for cell in board[i]):
+                return player
+            # Check columns
+            if all(board[j][i] == player for j in range(3)):
+                return player
+        # Check diagonals
+        if all(board[i][i] == player for i in range(3)) or all(board[i][2 - i] == player for i in range(3)):
+            return player
+    return None
 
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    if winner(board)==X or winner(board)==O:
+    if winner(board) is not None:
         return True
-    for i in range(3):
-        for j in range(3):
-            if board[i][j]==EMPTY:
-                return False
-    return True
+    return all(cell is not EMPTY for row in board for cell in row)
 
 def utility(board):
     """
