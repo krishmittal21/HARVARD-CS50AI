@@ -90,7 +90,6 @@ def diagonalcheck2(board,player):
     else :
         return False
 
-    return False
 def winner(board):
     """
     Returns the winner of the game, if there is one.
