@@ -94,7 +94,12 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    if rowcheck(board,X) or coloumncheck(board,X) or diagonalcheck(board,X) or diagonalcheck2(board,X):
+        return X
+    elif rowcheck(board,O) or coloumncheck(board,O) or diagonalcheck(board,O) or diagonalcheck2(board,O):
+        return O
+    else:
+        return None
 
 
 def terminal(board):
