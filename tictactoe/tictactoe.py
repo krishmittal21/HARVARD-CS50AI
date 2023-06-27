@@ -22,20 +22,9 @@ def player(board):
     """
     Returns player who has the next turn on a board.
     """
-    conutx=0
-    conuto=0
-    for i in range(3):
-        for j in range(3):
-            if board[i][j]==X:
-                conutx+=1
-            elif board[i][j]==O:
-                conuto+=1
-    if conutx>conuto:
-        return O
-    else:
-        return X
-
-
+    countx=sum(row.count(X) for row in board)
+    counto=sum(row.count(O) for row in board)
+    return O if countx > counto else X
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
