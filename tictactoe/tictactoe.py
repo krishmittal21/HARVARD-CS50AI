@@ -108,8 +108,8 @@ def terminal(board):
     """
     if winner(board)==X or winner(board)==O:
         return True
-    for i in 3:
-        for j in 3:
+    for i in range(3):
+        for j in range(3):
             if board[i][j]==EMPTY:
                 return False
     return True
@@ -143,4 +143,15 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    
+    if terminal(board):
+        return None
+    elif player(board)==X:
+        moves=[]
+        for i in actions(board):
+            moves.append((minvalue(result(board,i)),i))
+        return sorted(moves, key=lambda x: x[0],reverse=True)[0][1]
+    elif player(board)==O:
+        moves=[]
+        for i in actions(board):
+            moves.append((maxvalue(result(board,i)),i))
+        return sorted(moves, key=lambda x: x[0])[0][1]
