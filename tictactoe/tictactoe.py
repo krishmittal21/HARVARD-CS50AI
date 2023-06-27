@@ -43,9 +43,8 @@ def result(board, action):
     """
     if action not in actions(board):
         raise Exception("Invalid Action")
-    row,coloumn = action
     boardcopy = copy.deepcopy(board)
-    boardcopy[row][coloumn]=player(board)
+    boardcopy[action[0]][action[1]]=player(board)
     return boardcopy
 
 def rowcheck(board,player):
