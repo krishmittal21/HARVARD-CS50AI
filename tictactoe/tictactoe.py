@@ -69,6 +69,28 @@ def coloumncheck(board,player):
         if board[0][i]==player and board[1][i]==player and board[2][i]==player:
             return True
     return False
+def diagonalcheck(board,player):
+    n=0 #count for diagonal
+    for i in range(3):
+        for j in range(3):
+            if i==j and board[i][j]==player:
+                n+=1
+    if n==3:
+        return True
+    else :
+        return False
+def diagonalcheck2(board,player):
+    n=0 #count for diagonal
+    for i in range(3):
+        for j in range(3):
+            if (3-i-1)==j and board[i][j]==player:
+                n+=1
+    if n==3:
+        return True
+    else :
+        return False
+
+    return False
 def winner(board):
     """
     Returns the winner of the game, if there is one.
